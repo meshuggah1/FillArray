@@ -16,12 +16,12 @@ public class Main {
     private static void checkArraySize(String[] args) {
         if (args.length != 15) {
             System.out.println("Please, run the program with 15 numbers separated by spaces!");
-            System.exit(-1);
+            throw new IllegalArgumentException();
         }
     }
 
     private static long[] tryParse(String[] args) {
-        long parsedLong = 0L;
+        long parsedLong;
         long []arr = new long[15];
         int i = 0;
         for (String s: args) {
@@ -29,11 +29,12 @@ public class Main {
                 parsedLong = Long.parseLong(s);
                 if (parsedLong <= 15) {
                     System.out.println("At least one of the numbers is less or equal to 15!");
+                    throw new IllegalArgumentException();
                 }
                 arr[i++] = parsedLong;
             } catch (NumberFormatException e){
                 System.out.println("Please, run the program with correct arguments!");
-                System.exit(-1);
+                throw new IllegalArgumentException();
             }
         }
         return arr;
